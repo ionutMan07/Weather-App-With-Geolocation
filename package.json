@@ -1,6 +1,6 @@
 {
   "homepage": "https://ionutman07.github.io/Weather-App-With-Geolocation",
-  "name": "react-weather-app",
+  "name": "react-app",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
