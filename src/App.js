@@ -5,44 +5,36 @@ import './App.css';
 
 const apiKey = process.env.REACT_APP_API_KEY;
 
-const searchCity = (query) => {
-  const URL = `https://api.openweathermap.org/data/2.5/weather?q=${query}&units=metric&appid=${apiKey}`;
+const searchCity = (e) => {
+  if (e.key === 'Enter'){
+  const URL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`;
   return axios.get(URL).then((res) => setWeather(res));
+  }
 };
 
 const getWeatherbyLocation = (e) => {
-  const URL = `https://api.openweathermap.org/data/2.5/find?lat='${lat}&lon=${lon}&units=metric&&cnd=1&appid=${apiKey}`;
-  return axios.get(URL);
-};
-var getWeatherByLocation = function (position) {
   const lat = position.coords.latitude;
   const lon = position.coords.longitude;
-  console.log(`latitude: ${lat} / longitude: ${lon}`);
-  if (lat || lon === Number) {
-    var requestUrl = 'https://api.openweathermap.org/data/2.5/find?lat=';
-    requestUrl +=
-      lat + '&lon=' + lon + '&cnd=1&appid=' + API_KEY + '&units=metric';
-    console.log(requestUrl);
-    fetch(requestUrl)
-      .then(function (res) {
-        return res.json();
-      })
-      .then(function (result) {
-        console.log(result);
+  if (lat || lon === Number){
+  const URL = `https://api.openweathermap.org/data/2.5/find?lat='${lat}&lon=${lon}&units=metric&&cnd=1&appid=${apiKey}`;
+  return axios.get(URL).then((res) => setWeather(res));
+  }
+};
+
+  
+   {
+    
         var temp = Math.ceil(result.list[0].main.temp);
         var city = result.list[0].name;
 const locate = () => {
   navigator.geolocation.getCurrentPosition(getWeatherByLocation, onError);
 };
-      const lat = position.coords.latitude;
-      const lon = position.coords.longitude;
+
 function App() {
   const [city, setCity] = useState('');
   const [weather, setWeather] = useState({})
 
-  useEffect(() => {
-    searchCity(city).then((res) => setCity(res.data));
-  }, []);
+ 
 
   return (
     <div className="App">
