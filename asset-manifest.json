@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "/Weather-App-With-Geolocation/static/css/main.27297eca.chunk.css",
-    "main.js": "/Weather-App-With-Geolocation/static/js/main.fb28e346.chunk.js",
-    "main.js.map": "/Weather-App-With-Geolocation/static/js/main.fb28e346.chunk.js.map",
+    "main.css": "/Weather-App-With-Geolocation/static/css/main.034f549f.chunk.css",
+    "main.js": "/Weather-App-With-Geolocation/static/js/main.41e35301.chunk.js",
+    "main.js.map": "/Weather-App-With-Geolocation/static/js/main.41e35301.chunk.js.map",
     "runtime-main.js": "/Weather-App-With-Geolocation/static/js/runtime-main.4da0543e.js",
     "runtime-main.js.map": "/Weather-App-With-Geolocation/static/js/runtime-main.4da0543e.js.map",
     "static/css/2.20aa2d7b.chunk.css": "/Weather-App-With-Geolocation/static/css/2.20aa2d7b.chunk.css",
@@ -12,14 +12,14 @@
     "static/js/3.189c8fc2.chunk.js.map": "/Weather-App-With-Geolocation/static/js/3.189c8fc2.chunk.js.map",
     "index.html": "/Weather-App-With-Geolocation/index.html",
     "static/css/2.20aa2d7b.chunk.css.map": "/Weather-App-With-Geolocation/static/css/2.20aa2d7b.chunk.css.map",
-    "static/css/main.27297eca.chunk.css.map": "/Weather-App-With-Geolocation/static/css/main.27297eca.chunk.css.map",
+    "static/css/main.034f549f.chunk.css.map": "/Weather-App-With-Geolocation/static/css/main.034f549f.chunk.css.map",
     "static/js/2.63f86eec.chunk.js.LICENSE.txt": "/Weather-App-With-Geolocation/static/js/2.63f86eec.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.4da0543e.js",
     "static/css/2.20aa2d7b.chunk.css",
     "static/js/2.63f86eec.chunk.js",
-    "static/css/main.27297eca.chunk.css",
-    "static/js/main.fb28e346.chunk.js"
+    "static/css/main.034f549f.chunk.css",
+    "static/js/main.41e35301.chunk.js"
   ]
 }
