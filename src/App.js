@@ -1,37 +1,43 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+// import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
 const apiKey = process.env.REACT_APP_API_KEY;
 
-// const searchCity = (e) => {
-//   if (e.key === 'Enter'){
-//   const URL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`;
-//   return axios.get(URL).then((res) => setWeather(res));
-//   }
-// };
-
-// const getWeatherbyLocation = (e) => {
-//   const lat = position.coords.latitude;
-//   const lon = position.coords.longitude;
-//   if (lat || lon === Number){
-//   const URL = `https://api.openweathermap.org/data/2.5/find?lat='${lat}&lon=${lon}&units=metric&&cnd=1&appid=${apiKey}`;
-//   return axios.get(URL).then((res) => setWeather(res));
-//   }
-// };
-
-//    {
-
-//         var temp = Math.ceil(result.list[0].main.temp);
-//         var city = result.list[0].name;
-// const locate = () => {
-//   navigator.geolocation.getCurrentPosition(getWeatherByLocation, onError);
-// };
-
 function App() {
   const [city, setCity] = useState('');
   const [weather, setWeather] = useState({});
+
+  const searchCity = (e) => {
+    if (e.key === 'Enter' || city.length > 2) {
+      const URL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`;
+      fetch(URL)
+        .then((res) => res.json())
+        .then((result) => {
+          console.log(result);
+          setWeather(result);
+          setCity('');
+        });
+    }
+  };
+
+  // const getWeatherbyLocation = (position) => {
+  //   const lat = position.coords.latitude;
+  //   const lon = position.coords.longitude;
+  //   if (lat || lon === Number) {
+  //     const URL = `https://api.openweathermap.org/data/2.5/find?lat='${lat}&lon=${lon}&units=metric&&cnd=1&appid=${apiKey}`;
+  //     return axios.get(URL).then((res) => setWeather(res));
+  //   }
+  // };
+
+  // const onError = () => {
+  //   console.log('unable to locate');
+  // };
+
+  // const locate = () => {
+  //   navigator.geolocation.getCurrentPosition(getWeatherbyLocation, onError);
+  // };
 
   return (
     <div className="App">
@@ -41,8 +47,11 @@ function App() {
             className="search-bar"
             type="text"
             placeholder="Search city"
+            value={city}
+            onChange={(e) => setCity(e.target.value)}
+            onKeyPress={searchCity}
           ></input>
-          <button>
+          <button onClick={searchCity}>
             <svg
               stroke="currentColor"
               fill="currentColor"
@@ -85,17 +94,28 @@ function App() {
             </svg>
           </button>
         </div>
-        <div className="weather">
-          <h2 className="city mt-3">Weather in </h2>
-          <div className="temp col d-flex ">
-            <h1>51°C</h1>
-            <h3 className="mt-2 ml-4">feels like: 22°C</h3>
+        {typeof weather.main != 'undefined' ? (
+          <div className="weather">
+            <h2 className="city mt-3">Weather in {weather.name}</h2>
+            <div className="temp col d-flex ">
+              <h1>{Math.round(weather.main.temp)}°C</h1>
+              <h3 className="mt-2 ml-4">
+                feels like: {Math.round(weather.main.feels_like)}°C
+              </h3>
+            </div>
+            <img
+              className="icon"
+              src={`https://openweathermap.org/img/wn/${weather.weather[0].icon}.png`}
+              alt={weather.weather[0].icon}
+            />
+            <div className="decription">{weather.weather[0].main}</div>
+            <div className="humidity">Humidity: {weather.main.humidity}%</div>
+            <div className="wind">Wind speed {weather.wind.speed} km/h</div>
           </div>
-          <img className="icon" src="" alt="" />
-          <div className="decription">Cloudy</div>
-          <div className="humidity">Humidity: 60%</div>
-          <div className="wind">Wind speed 6.2 km/h</div>
-        </div>
+        ) : (
+          ''
+        )}
+        ;
       </div>
     </div>
   );
