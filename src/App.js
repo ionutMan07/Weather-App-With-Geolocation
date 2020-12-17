@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
-// import axios from 'axios';
+import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
-
-const apiKey = process.env.REACT_APP_API_KEY;
 
 function App() {
   const [city, setCity] = useState('');
   const [weather, setWeather] = useState({});
+  const [weatherLocation, setWeatherLocation] = useState([]);
+
+  const apiKey = process.env.REACT_APP_API_KEY;
 
   const searchCity = (e) => {
     if (e.key === 'Enter' || city.length > 2) {
@@ -15,29 +15,34 @@ function App() {
       fetch(URL)
         .then((res) => res.json())
         .then((result) => {
-          console.log(result);
           setWeather(result);
-          setCity('');
+          setTimeout(() => setCity(''), 1000);
         });
     }
   };
 
-  // const getWeatherbyLocation = (position) => {
-  //   const lat = position.coords.latitude;
-  //   const lon = position.coords.longitude;
-  //   if (lat || lon === Number) {
-  //     const URL = `https://api.openweathermap.org/data/2.5/find?lat='${lat}&lon=${lon}&units=metric&&cnd=1&appid=${apiKey}`;
-  //     return axios.get(URL).then((res) => setWeather(res));
-  //   }
-  // };
+  const getWeatherbyLocation = (position) => {
+    const lat = position.coords.latitude;
+    const lon = position.coords.longitude;
+    if (lat || lon === Number) {
+      const URL = `https://api.openweathermap.org/data/2.5/find?lat=${lat}&lon=${lon}&units=metric&&cnd=1&appid=${apiKey}`;
+      fetch(URL)
+        .then((res) => res.json())
+        .then((result) => {
+          console.log(result);
+          setWeatherLocation(result);
+          console.log(weatherLocation);
+        });
+    }
+  };
 
-  // const onError = () => {
-  //   console.log('unable to locate');
-  // };
+  const onError = () => {
+    console.log('unable to locate');
+  };
 
-  // const locate = () => {
-  //   navigator.geolocation.getCurrentPosition(getWeatherbyLocation, onError);
-  // };
+  const locate = () => {
+    navigator.geolocation.getCurrentPosition(getWeatherbyLocation, onError);
+  };
 
   return (
     <div className="App">
@@ -47,8 +52,8 @@ function App() {
             className="search-bar"
             type="text"
             placeholder="Search city"
-            value={city}
             onChange={(e) => setCity(e.target.value)}
+            value={city}
             onKeyPress={searchCity}
           ></input>
           <button onClick={searchCity}>
@@ -75,7 +80,7 @@ function App() {
               ></path>
             </svg>
           </button>
-          <button>
+          <button onClick={locate}>
             <svg
               stroke="currentColor"
               fill="currentColor"
@@ -115,7 +120,6 @@ function App() {
         ) : (
           ''
         )}
-        ;
       </div>
     </div>
   );
