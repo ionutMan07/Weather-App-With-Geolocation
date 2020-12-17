@@ -16,7 +16,6 @@ function App() {
         .then((res) => res.json())
         .then((result) => {
           setWeather(result);
-          setTimeout(() => setCity(''), 1000);
         });
     }
   };
