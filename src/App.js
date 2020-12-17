@@ -103,10 +103,10 @@ function App() {
             <h2 className="city mt-3">Weather in {weather.name}</h2>
             <div className="temp col d-flex ">
               <h1>{Math.round(weather.main.temp)}°C</h1>
-              <h3 className="mt-2 ml-4">
-                feels like: {Math.round(weather.main.feels_like)}°C
-              </h3>
             </div>
+            <h3 className="mt-2 ml-2">
+              feels like: {Math.round(weather.main.feels_like)}°C
+            </h3>
             <img
               className="icon"
               src={`https://openweathermap.org/img/wn/${weather.weather[0].icon}.png`}
