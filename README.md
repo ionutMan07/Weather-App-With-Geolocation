@@ -1,6 +1,6 @@
-React Weather App with Geolocation
 
-# React - weather-app
+
+# React Weather App with Geolocation
 
 https://ionutman07.github.io/Weather-App-With-Geolocation/
 
