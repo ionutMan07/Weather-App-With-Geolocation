@@ -14,7 +14,7 @@ https://ionutman07.github.io/Weather-App-With-Geolocation/
 
 First clone this repository.
 ```bash
-$ git clone https://github.com/rawfour/weather-app-react.git
+$ git clone https://github.com/ionutMan07/Weather-App-With-Geolocation.git
 ```
 
 Install dependencies. Make sure you already have [`nodejs`](https://nodejs.org/en/) & [`npm`](https://www.npmjs.com/) installed in your system.
