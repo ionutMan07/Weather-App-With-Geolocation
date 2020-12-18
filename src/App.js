@@ -5,7 +5,6 @@ import './App.css';
 function App() {
   const [city, setCity] = useState('');
   const [weather, setWeather] = useState({});
-  const [weatherLocation, setWeatherLocation] = useState([]);
 
   const apiKey = process.env.REACT_APP_API_KEY;
 
@@ -28,9 +27,7 @@ function App() {
       fetch(URL)
         .then((res) => res.json())
         .then((result) => {
-          console.log(result);
-          setWeatherLocation(result);
-          console.log(weatherLocation);
+          setWeather(result.list[0]);
         });
     }
   };
