@@ -2,6 +2,7 @@ React Weather App with Geolocation
 
 # React - weather-app
 
+https://ionutman07.github.io/Weather-App-With-Geolocation/
 
 ## Table of contents
 * [Instructions](#Instructions)
@@ -27,11 +28,12 @@ $ npm start # or yarn start
 ```
 
 ## Description
-This is a simple react weather app using OpenWeatherMap API and Geolocation from browser
+This is a simple react weather app using OpenWeatherMap API and Geolocation.
  
 ## Technologies
 Project uses:
 * React
+* React functional components
 * Styled Component
 * Bootstrap
 
