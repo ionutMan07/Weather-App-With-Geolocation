@@ -1,43 +1,32 @@
 import React, { useState } from 'react';
+import { SearchByCityAPI } from './shared/SearchByCityAPI';
+import { SearchByCoordAPI } from './shared/SearchByCoordAPI';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
 function App() {
   const [city, setCity] = useState('');
   const [weather, setWeather] = useState({});
+  const [message, setMessage] = useState('Search by city name or location');
 
-  const apiKey = process.env.REACT_APP_API_KEY;
-
-  const searchCity = (e) => {
+  const searchCity = async (e) => {
     if (e.key === 'Enter' || city.length > 2) {
-      const URL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`;
-      fetch(URL)
-        .then((res) => res.json())
-        .then((result) => {
-          setWeather(result);
-        });
+      const data = await SearchByCityAPI(city);
+      setWeather(data);
     }
   };
 
-  const getWeatherbyLocation = (position) => {
-    const lat = position.coords.latitude;
-    const lon = position.coords.longitude;
-    if (lat || lon === Number) {
-      const URL = `https://api.openweathermap.org/data/2.5/find?lat=${lat}&lon=${lon}&units=metric&&cnd=1&appid=${apiKey}`;
-      fetch(URL)
-        .then((res) => res.json())
-        .then((result) => {
-          setWeather(result.list[0]);
-        });
-    }
+  const searchCityByCoord = async (position) => {
+    const data = await SearchByCoordAPI(position);
+    setWeather(data.list[0]);
   };
 
   const onError = () => {
-    console.log('unable to locate');
+    setMessage('Unable to locate');
   };
 
   const locate = () => {
-    navigator.geolocation.getCurrentPosition(getWeatherbyLocation, onError);
+    navigator.geolocation.getCurrentPosition(searchCityByCoord, onError);
   };
 
   return (
@@ -47,7 +36,7 @@ function App() {
           <input
             className="search-bar"
             type="text"
-            placeholder="Search city"
+            placeholder="Search..."
             onChange={(e) => setCity(e.target.value)}
             value={city}
             onKeyPress={searchCity}
@@ -106,7 +95,7 @@ function App() {
             </h3>
             <img
               className="icon"
-              src={`https://openweathermap.org/img/wn/${weather.weather[0].icon}.png`}
+              src={`https://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`}
               alt={weather.weather[0].icon}
             />
             <div className="decription">{weather.weather[0].main}</div>
@@ -114,7 +103,7 @@ function App() {
             <div className="wind">Wind speed {weather.wind.speed} km/h</div>
           </div>
         ) : (
-          ''
+          <div>{message}</div>
         )}
       </div>
     </div>
