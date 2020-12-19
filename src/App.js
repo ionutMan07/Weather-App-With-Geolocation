@@ -10,9 +10,10 @@ function App() {
   const [message, setMessage] = useState('Search by city name or location');
 
   const searchCity = async (e) => {
-    if (e.key === 'Enter' || city.length > 2) {
+    if (e.key === 'Enter') {
       const data = await SearchByCityAPI(city);
       setWeather(data);
+      setCity('');
     }
   };
 
